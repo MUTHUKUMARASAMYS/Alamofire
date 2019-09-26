@@ -29,13 +29,13 @@ extension Notification.Name {
     public struct Task {
         /// Posted when a `URLSessionTask` is resumed. The notification `object` contains the resumed `URLSessionTask`.
         public static let DidResume = Notification.Name(rawValue: "org.alamofire.notification.name.task.didResume")
-        
+
         /// Posted when a `URLSessionTask` is suspended. The notification `object` contains the suspended `URLSessionTask`.
         public static let DidSuspend = Notification.Name(rawValue: "org.alamofire.notification.name.task.didSuspend")
-        
+
         /// Posted when a `URLSessionTask` is cancelled. The notification `object` contains the cancelled `URLSessionTask`.
         public static let DidCancel = Notification.Name(rawValue: "org.alamofire.notification.name.task.didCancel")
-        
+
         /// Posted when a `URLSessionTask` is completed. The notification `object` contains the completed `URLSessionTask`.
         public static let DidComplete = Notification.Name(rawValue: "org.alamofire.notification.name.task.didComplete")
     }
@@ -50,4 +50,3 @@ extension Notification {
         public static let Task = "org.alamofire.notification.key.task"
     }
 }
-

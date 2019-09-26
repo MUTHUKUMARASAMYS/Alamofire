@@ -28,21 +28,21 @@ import Foundation
 public struct DefaultDataResponse {
     /// The URL request sent to the server.
     public let request: URLRequest?
-    
+
     /// The server's response to the URL request.
     public let response: HTTPURLResponse?
-    
+
     /// The data returned by the server.
     public let data: Data?
-    
+
     /// The error encountered while executing or validating the request.
     public let error: Error?
-    
+
     /// The timeline of the complete lifecycle of the request.
     public let timeline: Timeline
-    
+
     var _metrics: AnyObject?
-    
+
     /// Creates a `DefaultDataResponse` instance from the specified parameters.
     ///
     /// - Parameters:
@@ -74,27 +74,27 @@ public struct DefaultDataResponse {
 public struct DataResponse<Value> {
     /// The URL request sent to the server.
     public let request: URLRequest?
-    
+
     /// The server's response to the URL request.
     public let response: HTTPURLResponse?
-    
+
     /// The data returned by the server.
     public let data: Data?
-    
+
     /// The result of response serialization.
     public let result: Result<Value>
-    
+
     /// The timeline of the complete lifecycle of the request.
     public let timeline: Timeline
-    
+
     /// Returns the associated value of the result if it is a success, `nil` otherwise.
     public var value: Value? { return result.value }
-    
+
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
     public var error: Error? { return result.error }
-    
+
     var _metrics: AnyObject?
-    
+
     /// Creates a `DataResponse` instance with the specified parameters derived from response serialization.
     ///
     /// - parameter request:  The URL request sent to the server.
@@ -127,18 +127,18 @@ extension DataResponse: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         return result.debugDescription
     }
-    
+
     /// The debug textual representation used when written to an output stream, which includes the URL request, the URL
     /// response, the server data, the response serialization result and the timeline.
     public var debugDescription: String {
         var output: [String] = []
-        
+
         output.append(request != nil ? "[Request]: \(request!.httpMethod ?? "GET") \(request!)" : "[Request]: nil")
         output.append(response != nil ? "[Response]: \(response!)" : "[Response]: nil")
         output.append("[Data]: \(data?.count ?? 0) bytes")
         output.append("[Result]: \(result.debugDescription)")
         output.append("[Timeline]: \(timeline.debugDescription)")
-        
+
         return output.joined(separator: "\n")
     }
 }
@@ -166,12 +166,12 @@ extension DataResponse {
             result: result.map(transform),
             timeline: timeline
         )
-        
+
         response._metrics = _metrics
-        
+
         return response
     }
-    
+
     /// Evaluates the given closure when the result of this `DataResponse` is a success, passing the unwrapped result
     /// value as a parameter.
     ///
@@ -194,9 +194,9 @@ extension DataResponse {
             result: result.flatMap(transform),
             timeline: timeline
         )
-        
+
         response._metrics = _metrics
-        
+
         return response
     }
 }
@@ -207,27 +207,27 @@ extension DataResponse {
 public struct DefaultDownloadResponse {
     /// The URL request sent to the server.
     public let request: URLRequest?
-    
+
     /// The server's response to the URL request.
     public let response: HTTPURLResponse?
-    
+
     /// The temporary destination URL of the data returned from the server.
     public let temporaryURL: URL?
-    
+
     /// The final destination URL of the data returned from the server if it was moved.
     public let destinationURL: URL?
-    
+
     /// The resume data generated if the request was cancelled.
     public let resumeData: Data?
-    
+
     /// The error encountered while executing or validating the request.
     public let error: Error?
-    
+
     /// The timeline of the complete lifecycle of the request.
     public let timeline: Timeline
-    
+
     var _metrics: AnyObject?
-    
+
     /// Creates a `DefaultDownloadResponse` instance from the specified parameters.
     ///
     /// - Parameters:
@@ -265,33 +265,33 @@ public struct DefaultDownloadResponse {
 public struct DownloadResponse<Value> {
     /// The URL request sent to the server.
     public let request: URLRequest?
-    
+
     /// The server's response to the URL request.
     public let response: HTTPURLResponse?
-    
+
     /// The temporary destination URL of the data returned from the server.
     public let temporaryURL: URL?
-    
+
     /// The final destination URL of the data returned from the server if it was moved.
     public let destinationURL: URL?
-    
+
     /// The resume data generated if the request was cancelled.
     public let resumeData: Data?
-    
+
     /// The result of response serialization.
     public let result: Result<Value>
-    
+
     /// The timeline of the complete lifecycle of the request.
     public let timeline: Timeline
-    
+
     /// Returns the associated value of the result if it is a success, `nil` otherwise.
     public var value: Value? { return result.value }
-    
+
     /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
     public var error: Error? { return result.error }
-    
+
     var _metrics: AnyObject?
-    
+
     /// Creates a `DownloadResponse` instance with the specified parameters derived from response serialization.
     ///
     /// - parameter request:        The URL request sent to the server.
@@ -330,13 +330,13 @@ extension DownloadResponse: CustomStringConvertible, CustomDebugStringConvertibl
     public var description: String {
         return result.debugDescription
     }
-    
+
     /// The debug textual representation used when written to an output stream, which includes the URL request, the URL
     /// response, the temporary and destination URLs, the resume data, the response serialization result and the
     /// timeline.
     public var debugDescription: String {
         var output: [String] = []
-        
+
         output.append(request != nil ? "[Request]: \(request!.httpMethod ?? "GET") \(request!)" : "[Request]: nil")
         output.append(response != nil ? "[Response]: \(response!)" : "[Response]: nil")
         output.append("[TemporaryURL]: \(temporaryURL?.path ?? "nil")")
@@ -344,7 +344,7 @@ extension DownloadResponse: CustomStringConvertible, CustomDebugStringConvertibl
         output.append("[ResumeData]: \(resumeData?.count ?? 0) bytes")
         output.append("[Result]: \(result.debugDescription)")
         output.append("[Timeline]: \(timeline.debugDescription)")
-        
+
         return output.joined(separator: "\n")
     }
 }
@@ -374,12 +374,12 @@ extension DownloadResponse {
             result: result.map(transform),
             timeline: timeline
         )
-        
+
         response._metrics = _metrics
-        
+
         return response
     }
-    
+
     /// Evaluates the given closure when the result of this `DownloadResponse` is a success, passing the unwrapped
     /// result value as a parameter.
     ///
@@ -404,9 +404,9 @@ extension DownloadResponse {
             result: result.flatMap(transform),
             timeline: timeline
         )
-        
+
         response._metrics = _metrics
-        
+
         return response
     }
 }
@@ -422,10 +422,10 @@ protocol Response {
 extension Response {
     mutating func add(_ metrics: AnyObject?) {
         #if !os(watchOS)
-        guard #available(iOS 10.0, macOS 10.12, tvOS 10.0, *) else { return }
-        guard let metrics = metrics as? URLSessionTaskMetrics else { return }
-        
-        _metrics = metrics
+            guard #available(iOS 10.0, macOS 10.12, tvOS 10.0, *) else { return }
+            guard let metrics = metrics as? URLSessionTaskMetrics else { return }
+
+            _metrics = metrics
         #endif
     }
 }
@@ -434,33 +434,32 @@ extension Response {
 
 @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
 extension DefaultDataResponse: Response {
-    #if !os(watchOS)
+#if !os(watchOS)
     /// The task metrics containing the request / response statistics.
     public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
-    #endif
+#endif
 }
 
 @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
 extension DataResponse: Response {
-    #if !os(watchOS)
+#if !os(watchOS)
     /// The task metrics containing the request / response statistics.
     public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
-    #endif
+#endif
 }
 
 @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
 extension DefaultDownloadResponse: Response {
-    #if !os(watchOS)
+#if !os(watchOS)
     /// The task metrics containing the request / response statistics.
     public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
-    #endif
+#endif
 }
 
 @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
 extension DownloadResponse: Response {
-    #if !os(watchOS)
+#if !os(watchOS)
     /// The task metrics containing the request / response statistics.
     public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
-    #endif
+#endif
 }
-

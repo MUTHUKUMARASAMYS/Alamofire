@@ -34,7 +34,7 @@ import Foundation
 public enum Result<Value> {
     case success(Value)
     case failure(Error)
-    
+
     /// Returns `true` if the result is a success, `false` otherwise.
     public var isSuccess: Bool {
         switch self {
@@ -44,12 +44,12 @@ public enum Result<Value> {
             return false
         }
     }
-    
+
     /// Returns `true` if the result is a failure, `false` otherwise.
     public var isFailure: Bool {
         return !isSuccess
     }
-    
+
     /// Returns the associated value if the result is a success, `nil` otherwise.
     public var value: Value? {
         switch self {
@@ -59,7 +59,7 @@ public enum Result<Value> {
             return nil
         }
     }
-    
+
     /// Returns the associated error value if the result is a failure, `nil` otherwise.
     public var error: Error? {
         switch self {
@@ -129,7 +129,7 @@ extension Result {
             self = .failure(error)
         }
     }
-    
+
     /// Returns the success value, or throws the failure error.
     ///
     ///     let possibleString: Result<String> = .success("success")
@@ -147,7 +147,7 @@ extension Result {
             throw error
         }
     }
-    
+
     /// Evaluates the specified closure when the `Result` is a success, passing the unwrapped value as a parameter.
     ///
     /// Use the `map` method with a closure that does not throw. For example:
@@ -174,7 +174,7 @@ extension Result {
             return .failure(error)
         }
     }
-    
+
     /// Evaluates the specified closure when the `Result` is a success, passing the unwrapped value as a parameter.
     ///
     /// Use the `flatMap` method with a closure that may throw an error. For example:
@@ -201,4 +201,3 @@ extension Result {
         }
     }
 }
-

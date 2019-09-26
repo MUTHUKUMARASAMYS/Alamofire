@@ -28,28 +28,28 @@ import Foundation
 public struct Timeline {
     /// The time the request was initialized.
     public let requestStartTime: CFAbsoluteTime
-    
+
     /// The time the first bytes were received from or sent to the server.
     public let initialResponseTime: CFAbsoluteTime
-    
+
     /// The time when the request was completed.
     public let requestCompletedTime: CFAbsoluteTime
-    
+
     /// The time when the response serialization was completed.
     public let serializationCompletedTime: CFAbsoluteTime
-    
+
     /// The time interval in seconds from the time the request started to the initial response from the server.
     public let latency: TimeInterval
-    
+
     /// The time interval in seconds from the time the request started to the time the request completed.
     public let requestDuration: TimeInterval
-    
+
     /// The time interval in seconds from the time the request completed to the time response serialization completed.
     public let serializationDuration: TimeInterval
-    
+
     /// The time interval in seconds from the time the request started to the time response serialization completed.
     public let totalDuration: TimeInterval
-    
+
     /// Creates a new `Timeline` instance with the specified request times.
     ///
     /// - parameter requestStartTime:           The time the request was initialized. Defaults to `0.0`.
@@ -70,7 +70,7 @@ public struct Timeline {
         self.initialResponseTime = initialResponseTime
         self.requestCompletedTime = requestCompletedTime
         self.serializationCompletedTime = serializationCompletedTime
-        
+
         self.latency = initialResponseTime - requestStartTime
         self.requestDuration = requestCompletedTime - requestStartTime
         self.serializationDuration = serializationCompletedTime - requestCompletedTime
@@ -88,7 +88,7 @@ extension Timeline: CustomStringConvertible {
         let requestDuration = String(format: "%.3f", self.requestDuration)
         let serializationDuration = String(format: "%.3f", self.serializationDuration)
         let totalDuration = String(format: "%.3f", self.totalDuration)
-        
+
         // NOTE: Had to move to string concatenation due to memory leak filed as rdar://26761490. Once memory leak is
         // fixed, we should move back to string interpolation by reverting commit 7d4a43b1.
         let timings = [
@@ -97,7 +97,7 @@ extension Timeline: CustomStringConvertible {
             "\"Serialization Duration\": " + serializationDuration + " secs",
             "\"Total Duration\": " + totalDuration + " secs"
         ]
-        
+
         return "Timeline: { " + timings.joined(separator: ", ") + " }"
     }
 }
@@ -117,7 +117,7 @@ extension Timeline: CustomDebugStringConvertible {
         let requestDuration = String(format: "%.3f", self.requestDuration)
         let serializationDuration = String(format: "%.3f", self.serializationDuration)
         let totalDuration = String(format: "%.3f", self.totalDuration)
-        
+
         // NOTE: Had to move to string concatenation due to memory leak filed as rdar://26761490. Once memory leak is
         // fixed, we should move back to string interpolation by reverting commit 7d4a43b1.
         let timings = [
@@ -130,8 +130,7 @@ extension Timeline: CustomDebugStringConvertible {
             "\"Serialization Duration\": " + serializationDuration + " secs",
             "\"Total Duration\": " + totalDuration + " secs"
         ]
-        
+
         return "Timeline: { " + timings.joined(separator: ", ") + " }"
     }
 }
-
